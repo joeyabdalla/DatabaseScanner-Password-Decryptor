@@ -1,23 +1,29 @@
 import hashlib
+import sqlite3
 
 def analyzer(input):
 
+    conn = sqlite3.connect('passwords_examples.db')
+    c = conn.cursor()
 
-    commonPasswords = open('password.txt', 'r')
+    c.execute("SELECT password FROM passwords")
+    common_passwords = c.fetchall()
 
-    for password in commonPasswords:
+    if common_passwords:
+        for password_tuple in common_passwords:
+            password = password_tuple[0]
 
-        encryption = password.encode('utf-8')
-        hasher = hashlib.md5(encryption.strip()).hexdigest()
+            encryption = password.encode('utf-8')
+            hasher = hashlib.md5(encryption.strip()).hexdigest()
 
-        if hasher == input:
-            print('Password is not secure enough')
-            break
-        else:
-            print('No Match was found')
-            print('Password is strong')
-            break
+            if hasher == input:
+                return False
+        return True
+    else:
+        print("Table 'passwords' does not exist in the database.")
+        return False
 
+    conn.close()
 
 def converter(x):
 
@@ -27,4 +33,10 @@ def converter(x):
     return analyzer(md5er)
 
 if __name__ == '__main__':
-    converter(input('Create a Password: '))
+    secure_password = False
+    while not secure_password:
+        password = input('Create a Password: ')
+        secure_password = converter(password)
+        if not secure_password:
+            print('Password is not secure enough. Please try again.')
+    print('Password is secure!')
