@@ -1,0 +1,31 @@
+##DatabaseScanner-Password-Decryptor
+
+Welcome to the DatabaseScanner-Password-Decryptor repository! This tool is designed to scan for and decrypt passwords stored in a variety of database formats.
+
+#Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+#Prerequisites
+
+In order to run this tool, you will need to have the following installed on your system:
+
+- Python 3
+- pip (package manager for Python)
+
+#Installing
+
+To install the dependencies for this project, open a terminal window and navigate to the root directory of the project. Then, run the following command:
+
+pip install -r requirements.txt
+
+This will install all of the necessary packages for the tool to run.
+
+#Running the Tool
+
+To run the tool, use the following command:
+
+- Copy code
+- python main.py
+
+Follow the prompts in the command line interface to specify the location of the database file and any necessary decryption keys. The tool will then scan the database and attempt to decrypt any stored passwords.
